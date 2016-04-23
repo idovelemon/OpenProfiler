@@ -7,10 +7,19 @@
 </head>
 <body>
 	<script type="text/javascript">
-		var win = new openprofiler.window.BaseWindow('Test window', 800, 600, 'Test Window');
-		win.draw();
-
-		var text = new openprofiler.window.TextWindow('Text', 'Text');
-		text.draw();
+		var text_ = new openprofiler.window.TextWindow('Text', 'Text');
+		text_.init();
+		text_.insertItem('FPS', 60);
+		text_.insertItem('CollisionNum', 12);
+		text_.insertItem('Time', 0.0);
+		var mainLoop_ = function() {
+			var fps_ = Math.random() * 60;
+			var num_ = Math.random() * 20;
+			text_.updateItem('FPS', fps_);
+			//text_.updateItem('CollisionNum', num_);
+			text_.draw();
+		};
+		
+		setInterval(mainLoop_, 1000.0/60.0);
 	</script>
 </body>

@@ -13,7 +13,116 @@ openprofiler.window.BaseWindow = function(title, width, height, canvas_id) {
 	this.draggable = true;
 	this.canvas = null;
 	this.canvas_id = canvas_id;
+};
 
+/**
+ * Return the title of the window.
+ * @return {string}
+ */
+openprofiler.window.BaseWindow.prototype.getTitle = function() {
+	return this.title;
+};
+
+/**
+ * Change the window's title.
+ * @param {string} new_title
+ */
+openprofiler.window.BaseWindow.prototype.setTitle = function(new_title) {
+	this.title = new_title;
+};
+
+/**
+ * Return the width of the window.
+ * @return {number}
+ */
+openprofiler.window.BaseWindow.prototype.getWidth = function() {
+	return this.width;
+};
+
+/**
+ * Change the width of the window.
+ * @param {number} new_width
+ */
+openprofiler.window.BaseWindow.prototype.setWidth = function(new_width) {
+	this.width = new_width;
+};
+
+/**
+ * Return the height of the window.
+ * @return {number}
+ */
+openprofiler.window.BaseWindow.prototype.getHeight = function() {
+	return this.height;
+};
+
+/**
+ * Change the height of the window.
+ * @param {number} new_height
+ */
+openprofiler.window.BaseWindow.prototype.setHeight = function(new_height) {
+	this.height = new_height;
+};
+
+/**
+ * Return the left-up corner's x position.
+ * @return {number}
+ */
+openprofiler.window.BaseWindow.prototype.getX = function() {
+	return this.x;
+};
+
+/**
+ * Change the left-up corner's x position.
+ * @param {number} new_x
+ */
+openprofiler.window.BaseWindow.prototype.setX = function(new_x) {
+	this.x = new_x;
+};
+
+/**
+ * Return the left-up corner's y position.
+ * @return {number}
+ */
+openprofiler.window.BaseWindow.prototype.getY = function() {
+	return this.y;
+};
+
+/**
+ * Change the left-up corner's y position.
+ * @param {number} new_y
+ */
+openprofiler.window.BaseWindow.prototype.setY = function(new_y) {
+	this.y = new_y;
+};
+
+/**
+ * Check if the window can be dragged.
+ * @return {boolean}
+ */
+openprofiler.window.BaseWindow.prototype.isDraggable = function() {
+	return this.draggable;
+};
+
+/**
+ * Change the draggable charactics of the window.
+ * @param {Boolean} is_draggable true means can drag.
+ */
+openprofiler.window.BaseWindow.prototype.setDraggable = function(is_draggable) {
+	this.draggable = is_draggable;
+};
+
+/**
+ * Return the canvas the window draw on.
+ * @return {canvas}
+ */
+openprofiler.window.BaseWindow.prototype.getCanvas = function() {
+	return this.canvas;
+};
+
+/**
+* Init the window after you create one.
+*/
+openprofiler.window.BaseWindow.prototype.init = function() {
 	/**
 	 * Create the canvas which the window will draw on.
 	 * @param  {string} canvas_id The id segment in <canvas id=canvas_id></canvas>
@@ -124,122 +233,13 @@ openprofiler.window.BaseWindow = function(title, width, height, canvas_id) {
 			this.style.top = window_y_ + 'px';
 		};
 	};
-};
 
-/**
- * Return the title of the window.
- * @return {string}
- */
-openprofiler.window.BaseWindow.prototype.getTitle = function() {
-	return this.title;
-};
-
-/**
- * Change the window's title.
- * @param {string} new_title
- */
-openprofiler.window.BaseWindow.prototype.setTitle = function(new_title) {
-	this.title = new_title;
-};
-
-/**
- * Return the width of the window.
- * @return {number}
- */
-openprofiler.window.BaseWindow.prototype.getWidth = function() {
-	return this.width;
-};
-
-/**
- * Change the width of the window.
- * @param {number} new_width
- */
-openprofiler.window.BaseWindow.prototype.setWidth = function(new_width) {
-	this.width = new_width;
-};
-
-/**
- * Return the height of the window.
- * @return {number}
- */
-openprofiler.window.BaseWindow.prototype.getHeight = function() {
-	return this.height;
-};
-
-/**
- * Change the height of the window.
- * @param {number} new_height
- */
-openprofiler.window.BaseWindow.prototype.setHeight = function(new_height) {
-	this.height = new_height;
-};
-
-/**
- * Return the left-up corner's x position.
- * @return {number}
- */
-openprofiler.window.BaseWindow.prototype.getX = function() {
-	return this.x;
-};
-
-/**
- * Change the left-up corner's x position.
- * @param {number} new_x
- */
-openprofiler.window.BaseWindow.prototype.setX = function(new_x) {
-	this.x = new_x;
-};
-
-/**
- * Return the left-up corner's y position.
- * @return {number}
- */
-openprofiler.window.BaseWindow.prototype.getY = function() {
-	return this.y;
-};
-
-/**
- * Change the left-up corner's y position.
- * @param {number} new_y
- */
-openprofiler.window.BaseWindow.prototype.setY = function(new_y) {
-	this.y = new_y;
-};
-
-/**
- * Check if the window can be dragged.
- * @return {boolean}
- */
-openprofiler.window.BaseWindow.prototype.isDraggable = function() {
-	return this.draggable;
-};
-
-/**
- * Change the draggable charactics of the window.
- * @param {Boolean} is_draggable true means can drag.
- */
-openprofiler.window.BaseWindow.prototype.setDraggable = function(is_draggable) {
-	this.draggable = is_draggable;
-};
-
-/**
- * Return the canvas the window draw on.
- * @return {canvas}
- */
-openprofiler.window.BaseWindow.prototype.getCanvas = function() {
-	return this.canvas;
+	throw Error('Must implement init method in child class. And call init method before child init method');
 };
 
 /**
  * Draw the windows immediatly.
  */
 openprofiler.window.BaseWindow.prototype.draw = function() {
-	if (this.canvas == null) {
-		return;
-	};
-
-	var ctx_ = this.canvas.getContext('2d');
-	ctx_.clearRect(0, 0, this.width, this.height);
-	ctx_.fillStyle = '#1f1f1f';
-	ctx_.fillRect(0, 0, this.width, this.height);
+	throw Error('Must implement this method in child class');
 };
