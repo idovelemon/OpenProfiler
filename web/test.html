@@ -12,6 +12,7 @@
 		text_.insertItem('FPS', 60);
 		text_.insertItem('CollisionNum', 12);
 		text_.insertItem('Time', 0.0);
+
 		var mainLoop_ = function() {
 			var fps_ = Math.random() * 60;
 			var num_ = Math.random() * 20;
@@ -21,5 +22,19 @@
 		};
 		
 		setInterval(mainLoop_, 1000.0/60.0);
+
+		var websocket_ = new WebSocket('ws://localhost:4567');
+		
+		websocket_.onopen = function(e) {
+			alert('Connect server!!!');
+		};
+
+		websocket_.onmessage = function(e) {
+			
+		};
+
+		websocket_.onerror = function(e) {
+			alert('Error');
+		};
 	</script>
 </body>

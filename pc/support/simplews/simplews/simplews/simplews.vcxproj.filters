@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="crptolib">
+      <UniqueIdentifier>{bcda5853-1a1f-4bed-b63c-0d1947d58997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libsocket">
+      <UniqueIdentifier>{d6c28f99-7aad-44d5-a17a-e7205005b586}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="crptolib\Base64_Code.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="crptolib\HMac_SHA1.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="crptolib\MD5_Encode.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="crptolib\SHA1_Code.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="crptolib\StringHash.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="swsserver.cpp" />
+    <ClCompile Include="libsocket\libsocket.cpp">
+      <Filter>libsocket</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="crptolib\base64.cpp">
+      <Filter>crptolib</Filter>
+    </ClCompile>
+    <ClCompile Include="swscommunication.cpp" />
+    <ClCompile Include="swsframepackager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="crptolib\Base64_Code.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\cloud_disk_struct.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\HMac_SHA1.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\MD5_Encode.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\SHA1_Code.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\StringHash.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="simplews.h" />
+    <ClInclude Include="swsserver.h" />
+    <ClInclude Include="swsdefine.h" />
+    <ClInclude Include="libsocket\libsocket.h">
+      <Filter>libsocket</Filter>
+    </ClInclude>
+    <ClInclude Include="crptolib\base64.h">
+      <Filter>crptolib</Filter>
+    </ClInclude>
+    <ClInclude Include="swscommunication.h" />
+    <ClInclude Include="swsframepackager.h" />
+  </ItemGroup>
+</Project>

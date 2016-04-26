@@ -1,0 +1,11 @@
+pc/support/simplews/simplews/Debug/simplews.exe
+*.ilk
+pc/support/simplews/simplews/Debug/simplews.pdb
+*.opensdf
+pc/support/simplews/simplews/simplews.sdf
+*.obj
+pc/support/simplews/simplews/simplews/Debug/cl.command.1.tlog
+*.tlog
+*.log
+pc/support/simplews/simplews/simplews/Debug/vc110.idb
+*.pdb
