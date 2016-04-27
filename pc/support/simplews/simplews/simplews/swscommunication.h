@@ -42,7 +42,8 @@ public:
 	// @brief: Recieve the buffer from the client through the communication.
 	// @param: buffer_size The size of the buffer.
 	// @param: buffer The buffer that stores the data from the communication.
-	// @return: The real length of the recieved data.
+	// @return: The real length of data that stored in the buffer.If the method failed, return -1.
+	// @note: This method will block the thread if it hasn't recieved data.
 	//--------------------------------------------------------------------------------
 	virtual int32_t RecvBuffer(int32_t buffer_size, char* buffer);
 

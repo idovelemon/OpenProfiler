@@ -27,12 +27,12 @@
 		
 		websocket_.onopen = function(e) {
 			alert('Connect server!!!');
+			websocket_.send('hello i_dovelemon!');
 		};
 
 		websocket_.onmessage = function(e) {
 			
 		};
-
 		websocket_.onerror = function(e) {
 			alert('Error');
 		};

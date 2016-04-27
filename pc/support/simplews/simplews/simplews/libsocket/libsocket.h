@@ -55,6 +55,7 @@ namespace libsocket {
 	// @param: buffer_size The parameter buffer's size
 	// @param: buffer The buffer used to recieve the data.
 	// @return: The real size of the recieved buffer. If the method failed, return -1.
+	// @note: This method will block the thread if it hasn't recieved data.
 	//----------------------------------------------------------------------------------------
 	int32_t LSRecvBuffer(SOCKET communicate_sock, int32_t buffer_size, char* buffer);
 
