@@ -28,7 +28,6 @@
     <ClCompile Include="crptolib\StringHash.cpp">
       <Filter>crptolib</Filter>
     </ClCompile>
-    <ClCompile Include="swsserver.cpp" />
     <ClCompile Include="libsocket\libsocket.cpp">
       <Filter>libsocket</Filter>
     </ClCompile>
@@ -36,8 +35,11 @@
     <ClCompile Include="crptolib\base64.cpp">
       <Filter>crptolib</Filter>
     </ClCompile>
-    <ClCompile Include="swscommunication.cpp" />
     <ClCompile Include="swsframepackager.cpp" />
+    <ClCompile Include="swscommunicationimp.cpp" />
+    <ClCompile Include="swsserverimp.cpp" />
+    <ClCompile Include="swsserver.cpp" />
+    <ClCompile Include="swscommunication.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crptolib\Base64_Code.h">
@@ -59,7 +61,6 @@
       <Filter>crptolib</Filter>
     </ClInclude>
     <ClInclude Include="simplews.h" />
-    <ClInclude Include="swsserver.h" />
     <ClInclude Include="swsdefine.h" />
     <ClInclude Include="libsocket\libsocket.h">
       <Filter>libsocket</Filter>
@@ -67,7 +68,10 @@
     <ClInclude Include="crptolib\base64.h">
       <Filter>crptolib</Filter>
     </ClInclude>
-    <ClInclude Include="swscommunication.h" />
     <ClInclude Include="swsframepackager.h" />
+    <ClInclude Include="swscommunicationimp.h" />
+    <ClInclude Include="swsserverimp.h" />
+    <ClInclude Include="swsserver.h" />
+    <ClInclude Include="swscommunication.h" />
   </ItemGroup>
 </Project>

@@ -10,6 +10,14 @@
 
 #include <assert.h>
 
+#define SWS_SAFE_DELETE(Pointer) \
+	do{ \
+		if(Pointer != NULL) { \
+			delete Pointer; \
+			Pointer = NULL; \
+		} \
+	}while(false)
+
 #define SWS_SAFE_ASSERT(Expression) \
 	do{ \
 		bool result = Expression; \
@@ -20,4 +28,4 @@
 	TypeName(const TypeName&); \
 	void operator=(const TypeName&)
 
-#endif
+#endif // SWS_SIMPLEWS_SWSDEFINE_H_

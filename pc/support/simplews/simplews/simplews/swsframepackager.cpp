@@ -4,6 +4,9 @@
 
 using namespace simplews;
 
+const int32_t SWS_WEBSOCKET_FRAME_HEADER_SIZE = 2;
+const int32_t SWS_WEBSOCKET_FRAME_MAX_LEN = 125;
+
 SWSFramePackager::SWSFramePackager() {
 }
 
@@ -13,7 +16,37 @@ SWSFramePackager::~SWSFramePackager() {
 bool SWSFramePackager::PackageUserData(char* user_data, int32_t user_data_size, char* ws_frame, int32_t& ws_frame_size) {
 	bool result = false;
 
-	// TODO: Add package code here...
+	if(user_data != NULL
+		&& user_data_size > 0) {
+			int32_t real_len = SWS_WEBSOCKET_FRAME_HEADER_SIZE + user_data_size; // The websocket frame's header is 6 bytes.
+			ws_frame_size = real_len;
+
+			if(ws_frame_size <= SWS_WEBSOCKET_FRAME_MAX_LEN) {
+				result = true;
+
+				if(ws_frame != NULL) {
+					char* frame = new char[ws_frame_size];
+					memset(frame, 0, ws_frame_size);
+
+					frame[0] = static_cast<char>(0x81);
+					frame[1] = user_data_size;
+					memcpy(frame+2, user_data, user_data_size);
+
+					int32_t real_copy_len = 0;
+					if(ws_frame_size > SWS_WEBSOCKET_FRAME_MAX_LEN) {
+						real_copy_len = SWS_WEBSOCKET_FRAME_MAX_LEN;
+					} else {
+						real_copy_len = ws_frame_size;
+					}
+
+					memcpy(ws_frame, frame, real_copy_len);
+					delete[] frame;
+					frame = NULL;
+
+					ws_frame_size = real_copy_len;
+				}
+			}
+	}
 
 	return result;
 }

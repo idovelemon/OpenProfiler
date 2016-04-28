@@ -1,87 +1,33 @@
 #include "swscommunication.h"
 
-#include "swsframepackager.h"
+#include "swscommunicationimp.h"
 
 using namespace simplews;
 
-SWSCommunication::SWSCommunication()
-	:communicate_sock_(INVALID_SOCKET) {
+SWSCommunication::SWSCommunication(SWSCommunicationImp* imp)
+	:imp_(imp) {
 }
 
 SWSCommunication::~SWSCommunication() {
-	closesocket(INVALID_SOCKET);
+	SWS_SAFE_DELETE(imp_);
 }
 
-void SWSCommunication::AttachSocket(SOCKET communicate_sock) {
-	if(communicate_sock_ != INVALID_SOCKET) {
-		closesocket(communicate_sock_);
-		communicate_sock_ = INVALID_SOCKET;
+int32_t SWSCommunication::SendBuffer(char* buffer, int32_t buffer_size) {
+	int32_t result = -1;
+	SWS_SAFE_ASSERT(imp_ != NULL);
+	if(imp_ != NULL) {
+		result = imp_->SendBuffer(buffer, buffer_size);
 	}
 
-	communicate_sock_ = communicate_sock;
-}
-
-void SWSCommunication::DetachSocket() {
-	closesocket(communicate_sock_);
-	communicate_sock_ = NULL;
-}
-
-void SWSCommunication::SendBuffer(char* buffer, int32_t buffer_size) {
-	SWS_SAFE_ASSERT(buffer != NULL && buffer_size > 0);
-	if(buffer != NULL
-		&& buffer_size > 0 ) {
-			SWSFramePackager packager;
-			int32_t ws_frame_size = 0;
-
-			// Get the final websocket frame buffer's size
-			packager.PackageUserData(buffer, buffer_size, NULL, ws_frame_size);
-
-			// Package the user data into websocket frame
-			char* ws_frame = new char[ws_frame_size];
-			packager.PackageUserData(buffer, buffer_size, ws_frame, ws_frame_size);
-
-			// Send the websocket frame
-			send(communicate_sock_, ws_frame, ws_frame_size, 0);
-			
-			delete[] ws_frame;
-			ws_frame = NULL;
-	}
+	return result;
 }
 
 int32_t SWSCommunication::RecvBuffer(int32_t buffer_size, char* buffer) {
-	int32_t len = -1;
-
-	SWS_SAFE_ASSERT(buffer_size > 0 && buffer != NULL);
-	if(buffer_size > 0
-		&& buffer != NULL) {
-			// Recieve websocket frame
-			char ws_frame_buffer[1024];
-			memset(ws_frame_buffer, 0, sizeof(ws_frame_buffer));
-			int32_t real_size_ws_frame = recv(communicate_sock_, ws_frame_buffer, sizeof(ws_frame_buffer), 0);
-
-			// Get user data's size
-			SWSFramePackager packager;
-			packager.UnPackageWebSocketFrame(ws_frame_buffer, real_size_ws_frame, len, NULL);
-				
-			// Allocate memory
-			char* user_data = new char[len];
-			if(packager.UnPackageWebSocketFrame(ws_frame_buffer, real_size_ws_frame, len, user_data)) {
-					
-				// Copy to output buffer
-				int32_t copy_len = 0;
-				if(buffer_size < len) {
-					copy_len = buffer_size;
-				} else {
-					copy_len = len;
-				}
-				memcpy(buffer, user_data, copy_len);
-
-				delete[] user_data;
-				user_data = NULL;
-
-				len = copy_len;
-			}
+	int32_t result = -1;
+	SWS_SAFE_ASSERT(imp_ != NULL);
+	if(imp_ != NULL) {
+		result = imp_->RecvBuffer(buffer_size, buffer);
 	}
-	
-	return len;
+
+	return result;
 }

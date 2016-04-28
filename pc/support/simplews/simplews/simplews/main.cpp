@@ -9,6 +9,9 @@ int main() {
 	int32_t len = com->RecvBuffer(sizeof(buffer), buffer);
 	buffer[len] = 0;
 	printf(buffer);
+
+	com->SendBuffer(buffer, len+1);
+
 	printf("Exit");
 	system("pause");
 	return 0;

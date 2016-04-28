@@ -5,6 +5,7 @@
 // Version: 1.0
 // Brief: SWSFramePackager packages and unpackage the websocket frame, so we can send and recieve data easily.
 // TODO: Support the Message Fragmentation.
+// TODO: Support morn than 125bytes user data.
 //--------------------------------------------------------------------------------------------
 #ifndef SWS_SIMPLEWS_SWSFRAMEPACKAGER_H_
 #define SWS_SIMPLEWS_SWSFRAMEPACKAGER_H_
@@ -29,6 +30,7 @@ public:
 	// @return: If the user data is valid and successfully package the data, then return true.
 	// @note: If the ws_frame_size is smaller than the real websocket frame's size, this method will return false.
 	// And do nothing with the ws_frame. 
+	// @note: This method only support the 125 bytes user data at most.
 	//----------------------------------------------------------------------
 	bool PackageUserData(char* user_data, int32_t user_data_size, char* ws_frame, int32_t& ws_frame_size);
 

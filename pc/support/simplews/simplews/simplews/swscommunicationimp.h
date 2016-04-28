@@ -1,12 +1,13 @@
 //-----------------------------------------------------------------------------------------
 // Declaration: Copyright (c), by i_dovelemon, 2016. All right reserved.
 // Author: i_dovelemon[1322600812@qq.com]
-// Date: 2016 / 04 / 28
+// Date: 2016 / 04 / 26
 // Version: 1.0
 // Brief: The SWSCommunication is the pipe between the server and client, you can use this to send and recieve data.
+// Update: 2016 / 04 / 28 - Use interface to hide the implementation detail.
 //-----------------------------------------------------------------------------------------
-#ifndef SWS_SIMPLEWS_SWSCOMMUNICATION_H_
-#define SWS_SIMPLEWS_SWSCOMMUNICATION_H_
+#ifndef SWS_SIMPLEWS_SWSCOMMUNICATIONIMP_H_
+#define SWS_SIMPLEWS_SWSCOMMUNICATIONIMP_H_
 
 #include <stdint.h>
 #include <WinSock2.h>
@@ -15,12 +16,21 @@
 
 namespace simplews {
 
-class SWSCommunicationImp;
-
-class SWSCommunication {
+class SWSCommunicationImp {
 public:
-	SWSCommunication(SWSCommunicationImp* imp);
-	virtual ~SWSCommunication();
+	SWSCommunicationImp();
+	virtual ~SWSCommunicationImp();
+
+	//-------------------------------------------------------------------------------
+	// @brief: Attach a socket to this communication, all the communications between server and client will go through the socket.
+	// @param: communicate_sock The socket between server and client.
+	//-------------------------------------------------------------------------------
+	virtual void AttachSocket(SOCKET communicate_sock);
+	
+	//--------------------------------------------------------------------------------
+	// @brief: Detach the socket from the communication.
+	//--------------------------------------------------------------------------------
+	virtual void DetachSocket();
 
 	//--------------------------------------------------------------------------------
 	// @brief: Send the buffer to the client through the communication.
@@ -40,10 +50,10 @@ public:
 	virtual int32_t RecvBuffer(int32_t buffer_size, char* buffer);
 
 protected:
-	SWSCommunicationImp*					imp_;
+	SOCKET									communicate_sock_;	// The communicate socket between the server and client.
 
 private:
-	SWS_DISALLOW_COPY_AND_ASSIGN(SWSCommunication);
+	SWS_DISALLOW_COPY_AND_ASSIGN(SWSCommunicationImp);
 };
 
 }; // namespace simplews

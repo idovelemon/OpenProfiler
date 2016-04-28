@@ -85,8 +85,10 @@
     <ClCompile Include="libsocket\libsocket.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="swscommunication.cpp" />
+    <ClCompile Include="swscommunicationimp.cpp" />
     <ClCompile Include="swsframepackager.cpp" />
     <ClCompile Include="swsserver.cpp" />
+    <ClCompile Include="swsserverimp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crptolib\base64.h" />
@@ -99,9 +101,11 @@
     <ClInclude Include="libsocket\libsocket.h" />
     <ClInclude Include="simplews.h" />
     <ClInclude Include="swscommunication.h" />
+    <ClInclude Include="swscommunicationimp.h" />
     <ClInclude Include="swsdefine.h" />
     <ClInclude Include="swsframepackager.h" />
     <ClInclude Include="swsserver.h" />
+    <ClInclude Include="swsserverimp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
