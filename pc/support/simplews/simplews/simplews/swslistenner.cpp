@@ -1,19 +1,19 @@
-#include "swsserver.h"
+#include "swslistenner.h"
 
 #include "swscommunication.h"
-#include "swsserverimp.h"
+#include "swslistennerimp.h"
 
 using namespace simplews;
 
-SWSServer::SWSServer(int16_t port)
-	:imp_(new SWSServerImp(port)) {
+SWSListenner::SWSListenner(int16_t port)
+	:imp_(new SWSListennerImp(port)) {
 }
 
-SWSServer::~SWSServer() {
+SWSListenner::~SWSListenner() {
 	SWS_SAFE_DELETE(imp_);
 }
 
-SWSCommunication* SWSServer::WaitConnection(int32_t time) {
+SWSCommunication* SWSListenner::WaitConnection(int32_t time) {
 	SWSCommunication* communication = NULL;
 	SWS_SAFE_ASSERT(imp_ != NULL);
 	if(imp_ != NULL) {
@@ -23,7 +23,7 @@ SWSCommunication* SWSServer::WaitConnection(int32_t time) {
 	return communication;
 }
 
-void SWSServer::Close() {
+void SWSListenner::Close() {
 	SWS_SAFE_ASSERT(imp_ != NULL);
 	if(imp_ != NULL) {
 		imp_->Close();

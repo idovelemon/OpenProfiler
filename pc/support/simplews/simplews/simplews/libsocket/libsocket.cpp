@@ -72,7 +72,6 @@ SOCKET libsocket::LSWaitConnection(SOCKET listen, int32_t time, sockaddr* remote
 		} else {
 			communication_sock = accept(listen, (sockaddr*)&remote, length);
 		}
-		int32_t error = WSAGetLastError();
 
 		if(communication_sock != INVALID_SOCKET) {
 			result = true;

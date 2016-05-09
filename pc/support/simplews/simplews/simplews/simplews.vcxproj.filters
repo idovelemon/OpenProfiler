@@ -37,9 +37,9 @@
     </ClCompile>
     <ClCompile Include="swsframepackager.cpp" />
     <ClCompile Include="swscommunicationimp.cpp" />
-    <ClCompile Include="swsserverimp.cpp" />
-    <ClCompile Include="swsserver.cpp" />
     <ClCompile Include="swscommunication.cpp" />
+    <ClCompile Include="swslistenner.cpp" />
+    <ClCompile Include="swslistennerimp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="crptolib\Base64_Code.h">
@@ -70,8 +70,8 @@
     </ClInclude>
     <ClInclude Include="swsframepackager.h" />
     <ClInclude Include="swscommunicationimp.h" />
-    <ClInclude Include="swsserverimp.h" />
-    <ClInclude Include="swsserver.h" />
     <ClInclude Include="swscommunication.h" />
+    <ClInclude Include="swslistenner.h" />
+    <ClInclude Include="swslistennerimp.h" />
   </ItemGroup>
 </Project>
