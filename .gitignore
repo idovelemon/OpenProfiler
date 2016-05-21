@@ -10,3 +10,9 @@ pc/support/simplews/simplews/simplews/Debug/cl.command.1.tlog
 pc/support/simplews/simplews/simplews/Debug/vc110.idb
 *.pdb
 pc/support/simplews/simplews/ipch/simplews_test-5d886fee/simplews_test-410e1dff.ipch
+*.ipch
+pc/support/project/simplews/Debug/simplews_x86D.lib
+pc/support/project/simplews/Release/simplews_x86R.lib
+*.lastbuildstate
+pc/support/project/simplews/simplews/Debug/vc110.idb
+*.sdf

@@ -20,25 +20,25 @@ openprofiler.window.TextWindow.prototype = new openprofiler.window.BaseWindow();
 * The item window's default height
 * @const
 */
-openprofiler.window.TextWindow.ITEM_WINDOW_HEIGHT = 32;
+openprofiler.window.TextWindow.ITEM_WINDOW_HEIGHT = 40;
 
 /**
 * The item's default width
 * @const
 */
-openprofiler.window.TextWindow.ITEM_WINDOW_WIDTH = 100;
+openprofiler.window.TextWindow.ITEM_WINDOW_WIDTH = 200;
 
 /**
 * The title window's height
 * @const
 */
-openprofiler.window.TextWindow.TITLE_WINDOW_HEIGHT = 20;
+openprofiler.window.TextWindow.TITLE_WINDOW_HEIGHT = 32;
 
 /**
 * The title window's width
 * @const
 */
-openprofiler.window.TextWindow.TITLE_WINDOW_WIDTH = 100;
+openprofiler.window.TextWindow.TITLE_WINDOW_WIDTH = 200;
 
 /**
 * Insert a text item in the window.
@@ -93,7 +93,6 @@ openprofiler.window.TextWindow.prototype.init = function() {
 openprofiler.window.TextWindow.prototype.draw = function() {
 	if (this.canvas == null) {
 		throw Error('Must implement init method in child class. And call init method before child init method');
-		return;
 	};
 
 	var TextWindow = openprofiler.window.TextWindow;
@@ -104,47 +103,73 @@ openprofiler.window.TextWindow.prototype.draw = function() {
 	};
 
 	ctx_.clearRect(0, 0, this.width, this.height);
-
-	// Draw title
-	ctx_.fillStyle = '#00ff00';
+	
+	// Draw background
+	ctx_.fillStyle = '#494949';
 	ctx_.fillRect(0, 0, TextWindow.TITLE_WINDOW_WIDTH, TextWindow.TITLE_WINDOW_HEIGHT);
-	ctx_.textAlign = 'center';
-	ctx_.textBaseline = 'middle';
-	ctx_.strokeText(this.title, TextWindow.TITLE_WINDOW_WIDTH / 2, TextWindow.TITLE_WINDOW_HEIGHT / 2);
-
-	// Draw the background
-	var cur_num_items = 0;
-	while (true) {
-		if (cur_num_items >= this.num_items) {
-			break;
-		};
-		
-		if (cur_num_items % 2 == 0) {
-			ctx_.fillStyle = '#ffff00';
+	for(var cur_num_item = 0; cur_num_item < this.num_items; cur_num_item++) {
+		if(cur_num_item % 2 == 0) {
+			ctx_.fillStyle = '#252526';
 		} else {
-			ctx_.fillStyle = '#ff00ff';
-		};
-
-		ctx_.fillRect(0, TextWindow.TITLE_WINDOW_HEIGHT + cur_num_items * TextWindow.ITEM_WINDOW_HEIGHT, this.width, TextWindow.ITEM_WINDOW_HEIGHT);
-		cur_num_items = cur_num_items + 1;
-	};
+			ctx_.fillStyle = '#373737';
+		}
+		
+		ctx_.fillRect(0, TextWindow.TITLE_WINDOW_HEIGHT + cur_num_item * TextWindow.ITEM_WINDOW_HEIGHT	
+					 ,TextWindow.ITEM_WINDOW_WIDTH, TextWindow.ITEM_WINDOW_HEIGHT);
+	}
+	
+	// Draw board
+	// Inner board
+	ctx_.fillStyle = '#101010';
+	for(var cur_num_item = 0; cur_num_item < this.num_items; cur_num_item++) {
+		ctx_.fillRect(0, TextWindow.TITLE_WINDOW_HEIGHT + cur_num_item * TextWindow.ITEM_WINDOW_HEIGHT
+					 ,TextWindow.ITEM_WINDOW_WIDTH, 1);
+	}
+	
+	// Outter board
+	// Up
+	ctx_.fillRect(0, 0, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	ctx_.fillRect(0, 1, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	ctx_.fillRect(0, 2, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	
+	// Down
+	var down = TextWindow.TITLE_WINDOW_HEIGHT + TextWindow.ITEM_WINDOW_HEIGHT * this.num_items;
+	ctx_.fillRect(0, down - 1, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	ctx_.fillRect(0, down - 2, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	ctx_.fillRect(0, down - 3, TextWindow.ITEM_WINDOW_WIDTH, 1);
+	
+	// Left
+	ctx_.fillRect(0, 0, 1, down);
+	ctx_.fillRect(1, 0, 1, down);
+	ctx_.fillRect(2, 0, 1, down);
+	
+	// Right
+	ctx_.fillRect(TextWindow.ITEM_WINDOW_WIDTH - 1, 0, 1, down);
+	ctx_.fillRect(TextWindow.ITEM_WINDOW_WIDTH - 2, 0, 1, down);
+	ctx_.fillRect(TextWindow.ITEM_WINDOW_WIDTH - 3, 0, 1, down);
 
 	// Draw text
+	ctx_.fillStyle = '#ffffff';
 	ctx_.textAlign = 'left';
 	ctx_.textBaseline = 'middle';
+	ctx_.font = '24px Garamond'
 	cur_num_items = 0;
 	while (true) {
 		if (cur_num_items >= this.num_items) {
 			break;
 		};
 
-		var x_ = 0;
+		var x_ = 4;
 		var y_ = TextWindow.TITLE_WINDOW_HEIGHT + TextWindow.ITEM_WINDOW_HEIGHT * cur_num_items + TextWindow.ITEM_WINDOW_HEIGHT / 2;
 		var item_ = this.textmap[cur_num_items];
-		var text_ = item_.key + ':' + item_.value.toString();
-		ctx_.strokeText(text_, x_, y_);
+		var text_ = item_.key + ':  ' + item_.value.toString();
+		ctx_.fillText(text_, x_, y_);
 
 		cur_num_items = cur_num_items + 1;
-	};
-
-};
+	}
+	
+	ctx_.textAlign = 'center';
+	ctx_.font = '20px Garamond'
+	var title_ = '[ ' + this.title + ' ]';
+	ctx_.fillText(title_, TextWindow.TITLE_WINDOW_WIDTH / 2, TextWindow.TITLE_WINDOW_HEIGHT / 2);
+}

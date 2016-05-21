@@ -22,19 +22,5 @@
 		};
 		
 		setInterval(mainLoop_, 1000.0/60.0);
-
-		var websocket_ = new WebSocket('ws://localhost:4567');
-		
-		websocket_.onopen = function(e) {
-			alert('Connect server!!!');
-			websocket_.send('hello i_dovelemon!');
-		};
-
-		websocket_.onmessage = function(e) {
-			alert(e.data);
-		};
-		websocket_.onerror = function(e) {
-			alert('Error');
-		};
 	</script>
 </body>
